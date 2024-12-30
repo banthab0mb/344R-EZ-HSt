@@ -50,12 +50,6 @@ void initialize() {
 	// Print our branding over your terminal :D
 	ez::ez_template_print();
 
-	// LED stuffs
-	strand1.init();
-	strand1.rainbow();
-	strand2.init();
-	strand2.rainbow();
-
 	pros::delay(500);  // Stop the user from doing anything while legacy ports configure
 
 	// Are you using tracking wheels?  Comment out which ones you're using here!
@@ -134,6 +128,13 @@ void initialize() {
 	master.rumble(".");
 	pros::Task tempcheckcontroller(tempcheckctrl);
 	pros::Task colordetection(colorDetect);
+
+	// LED stuffs
+	strand1.init();
+	strand1.rainbow();
+	strand2.init();
+	strand2.rainbow();
+
 }
 
 /**
@@ -289,7 +290,7 @@ void ez_template_etxras() {
 
 void opcontrol() {
 	// This is preference to what you like to drive on
-	chassis.drive_brake_set(MOTOR_BRAKE_BRAKE);
+	chassis.drive_brake_set(MOTOR_BRAKE_COAST);
 	scrpage = 2;
 	lv_event_send(pageswitch, LV_EVENT_CLICKED, NULL);
 
@@ -297,8 +298,8 @@ void opcontrol() {
 		// Gives you some extras to make EZ-Template easier
 		ez_template_etxras();
 
-		chassis.opcontrol_tank();  // Tank control
-								   // chassis.opcontrol_arcade_standard(ez::SPLIT);   // Standard split arcade
+								   // chassis.opcontrol_tank();  // Tank control
+		chassis.opcontrol_arcade_standard(ez::SPLIT);   // Standard split arcade
 								   // chassis.opcontrol_arcade_standard(ez::SINGLE);  // Standard single arcade
 								   // chassis.opcontrol_arcade_flipped(ez::SPLIT);    // Flipped split arcade
 								   // chassis.opcontrol_arcade_flipped(ez::SINGLE);   // Flipped single arcade
