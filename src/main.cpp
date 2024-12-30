@@ -1,10 +1,15 @@
 #include "main.h"
+#include "stormlib/led.hpp"
 
 // big money $_$
 /////
 // For installation, upgrading, documentations, and tutorials, check out our
 // website! https://ez-robotics.github.io/EZ-Template/
 /////
+
+// LEDs 
+stormlib::aRGB strand1(7, 41);
+stormlib::aRGB strand2(8, 41);
 
 // Chassis constructor
 ez::Drive chassis(
@@ -44,6 +49,12 @@ vector<jas::motors::motordata> motorbar{{intake1, "intake 1"}, {driveleft1, "dri
 void initialize() {
 	// Print our branding over your terminal :D
 	ez::ez_template_print();
+
+	// LED stuffs
+	strand1.init();
+	strand1.rainbow();
+	strand2.init();
+	strand2.rainbow();
 
 	pros::delay(500);  // Stop the user from doing anything while legacy ports configure
 

@@ -43,6 +43,7 @@
 //#include "pros/api_legacy.h"
 #include "EZ-Template/api.hpp"  // IWYU pragma: keep
 #include "ui/filesystem.h" // IWYU pragma: keep
+#include "stormlib/api.hpp"
 
 // More includes here...
 #include "autonbuilder.hpp"  // IWYU pragma: keep
