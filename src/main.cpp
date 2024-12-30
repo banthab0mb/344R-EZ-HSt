@@ -6,11 +6,11 @@
 // website! https://ez-robotics.github.io/EZ-Template/
 /////
 
-// Chassis consptructor
+// Chassis constructor
 ez::Drive chassis(
 	// These are your drive motors, the first motor is used for sensing!
-	{-13, -14, -15},  // Left Chassis Ports (negative port will reverse it!)
-	{17, 18, 20},	  // Right Chassis Ports (negative port will reverse it!)
+	{-1, 2, -3},  // Left Chassis Ports (negative port will reverse it!)
+	{4, -5, 6},	  // Right Chassis Ports (negative port will reverse it!)
 
 	12,	   // IMU Port
 	3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
@@ -20,21 +20,21 @@ ez::Drive chassis(
 //  `2.75` is the wheel diameter
 //  `4.0` is the distance from the center of the wheel to the center of the robot
 // ez::tracking_wheel right_tracker({-'A', -'B'}, 2.75, 4.0);  // ADI Encoders
-ez::tracking_wheel vertical_tracker(16, 2.03856, 0.7);	// Rotation sensors
-ez::tracking_wheel horiz_tracker(10, 2.03856, -0.5);
+//ez::tracking_wheel vertical_tracker(16, 2.03856, 0.7);	// Rotation sensors
+//ez::tracking_wheel horiz_tracker(10, 2.03856, -0.5);
+
 // list of motors to get temperature
-pros::Motor intake1(4);
-pros::Motor intake2(6);
-pros::Motor wallstake(21);
-pros::Motor driveleft1(-13);
-pros::Motor driveleft2(-14);
-pros::Motor driveleft3(-15);
-pros::Motor driveright1(17);
-pros::Motor driveright2(18);
-pros::Motor driveright3(20);
+pros::Motor intake1(12);
+pros::Motor wallstake(14);
+pros::Motor driveleft1(-1);
+pros::Motor driveleft2(2);
+pros::Motor driveleft3(-3);
+pros::Motor driveright1(4);
+pros::Motor driveright2(-5);
+pros::Motor driveright3(6);
 
 vector<jas::motors::motordata> motorbar{{intake1, "intake 1"}, {driveleft1, "drive l1"},  {driveleft2, "drive l2"},	 {driveleft3, "drive l3"},
-										{intake2, "intake 2"}, {driveright1, "drive r1"}, {driveright2, "drive r2"}, {driveright3, "drive r3"}};
+										{driveright1, "drive r1"}, {driveright2, "drive r2"}, {driveright3, "drive r3"}};
 /**
  * Runs initialization code. This occurs as soon as the program is started.
  *
@@ -48,9 +48,9 @@ void initialize() {
 	pros::delay(500);  // Stop the user from doing anything while legacy ports configure
 
 	// Are you using tracking wheels?  Comment out which ones you're using here!
-	chassis.odom_tracker_right_set(&vertical_tracker);
+	//chassis.odom_tracker_right_set(&vertical_tracker);
 	// chassis.odom_tracker_left_set(&left_tracker);
-	chassis.odom_tracker_back_set(&horiz_tracker);	// Replace `back` to `front` if your tracker is in the front!
+	//chassis.odom_tracker_back_set(&horiz_tracker);	// Replace `back` to `front` if your tracker is in the front!
 
 	// Configure your chassis controls
 	chassis.opcontrol_curve_buttons_toggle(false);	// Enables modifying the controller curve with buttons on the
