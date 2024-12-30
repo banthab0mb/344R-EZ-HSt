@@ -1,1 +1,3 @@
-# 21S Code for High Stakes robot Pringle!
+# 344R Code for High Stakes
+
+Uses EZ-Template
