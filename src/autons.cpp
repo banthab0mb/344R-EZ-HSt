@@ -127,7 +127,7 @@ void testcolorsortRed() {
 	chassis.pid_drive_set(20_in, 32, false);
 	chassis.pid_wait();
 	chassis.pid_turn_set(135_deg, TURN_SPEED);
-	wallmech.move_relative(-700, -127);
+	nextState();
 }
 
 void testautonBlue() {
@@ -148,7 +148,7 @@ void testcolorsortBlue() {
 	chassis.pid_drive_set(20_in, 32, false);
 	chassis.pid_wait();
 	chassis.pid_turn_set(-135_deg, TURN_SPEED);
-	wallmech.move_relative(-700, -127);
+	nextState();
 }
 
 void red_50WP() {
@@ -175,7 +175,7 @@ void red_50WP() {
 		return;
 	}
 	intake.move(0);
-	wallmech.move_relative(-500, -127);
+	nextState();
 	chassis.pid_drive_set(24_in, DRIVE_SPEED, true);
 	chassis.pid_wait();
 }
@@ -225,7 +225,7 @@ void red_4ring() {
 	chassis.pid_wait_quick_chain();
 	chassis.pid_turn_set(180_deg, TURN_SPEED);
 	chassis.pid_wait_quick_chain();
-	wallmech.move_relative(500, -127);
+	nextState();
 	chassis.pid_drive_set(50_in, DRIVE_SPEED, true);
 	chassis.pid_wait();
 }
@@ -259,7 +259,7 @@ void red_4greed() {
 	chassis.pid_wait_quick_chain();
 	chassis.pid_turn_relative_set(45_deg, TURN_SPEED);
 	chassis.pid_wait_quick_chain();
-	wallmech.move_relative(-500, -127);
+	nextState();
 	chassis.pid_wait();
 }
 
@@ -307,7 +307,7 @@ void red_6ring() {
 	chassis.pid_wait_quick_chain();
 	chassis.pid_turn_relative_set(45_deg, TURN_SPEED);
 	chassis.pid_wait_quick_chain();
-	wallmech.move_relative(500, -127);
+	nextState();
 	chassis.pid_drive_set(30_in, DRIVE_SPEED, true);
 	chassis.pid_wait();
 }
@@ -375,7 +375,7 @@ void blue_50WP() {
 	if(!chassis.interfered) {
 		return;
 	}
-	wallmech.move_relative(-500, -127);
+	nextState();
 	chassis.pid_drive_set(24_in, DRIVE_SPEED, true);
 	chassis.pid_wait();
 }
@@ -425,7 +425,7 @@ void blue_4ring() {
 	chassis.pid_wait();
 	chassis.pid_turn_relative_set(-90_deg, TURN_SPEED);
 	chassis.pid_wait_quick_chain();
-	wallmech.move_relative(500, -127);
+	nextState();
 	chassis.pid_drive_set(50_in, DRIVE_SPEED, true);
 	chassis.pid_wait();
 }
@@ -458,7 +458,7 @@ void blue_4greed() {
 	chassis.pid_wait_quick_chain();
 	chassis.pid_turn_relative_set(-45_deg, TURN_SPEED);
 	chassis.pid_wait_quick_chain();
-	wallmech.move_relative(-500, -127);
+	nextState();
 	chassis.pid_drive_set(48_in, DRIVE_SPEED, true);
 	chassis.pid_wait();
 }
@@ -508,7 +508,7 @@ void blue_6ring() {
 	chassis.pid_wait_quick_chain();
 	chassis.pid_turn_relative_set(-45_deg, TURN_SPEED);
 	chassis.pid_wait_quick_chain();
-	wallmech.move_relative(500, -127);
+	nextState();
 	chassis.pid_drive_set(26_in, DRIVE_SPEED, true);
 	chassis.pid_wait();
 }
@@ -703,12 +703,12 @@ void skills50() {
 	chassis.pid_wait();
 	chassis.pid_turn_relative_set(360_deg, 127);
 	chassis.pid_wait();
-	wallmech.move_absolute(-700, -90);
+	nextState();
 	// indexer.set(false);
 	pros::delay(1000);
 	chassis.pid_drive_set(8_in, DRIVE_SPEED, false);
 	chassis.pid_wait();
-	wallmech.move_absolute(0, 90);
+	nextState();
 	chassis.pid_drive_set(-14_in, 75, false);
 	chassis.pid_wait_quick_chain();
 	chassis.pid_turn_set(180_deg, TURN_SPEED);
@@ -766,12 +766,12 @@ void skills50() {
 	chassis.pid_wait();
 	chassis.pid_turn_relative_set(360_deg, 127);
 	chassis.pid_wait();
-	wallmech.move_absolute(-700, -90);
+	nextState();
 	// indexer.set(false);
 	pros::delay(1000);
 	chassis.pid_drive_set(8_in, DRIVE_SPEED, false);
 	chassis.pid_wait();
-	wallmech.move_absolute(0, 90);
+	nextState();
 	chassis.pid_drive_set(-8_in, 75, false);
 	chassis.pid_wait_quick_chain();
 	chassis.pid_turn_set(48_deg, TURN_SPEED);
@@ -980,7 +980,3 @@ void interfered_example() {
 	chassis.pid_turn_set(90_deg, TURN_SPEED);
 	chassis.pid_wait();
 }
-
-// . . .
-// Make your own autonomous functions here!
-// . . .
