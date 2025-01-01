@@ -39,9 +39,8 @@ void colorDetect() {
 }
 
 void discard() {
-	indexer.set(true);
+	intake.brake();
 	pros::delay(2000);
-	indexer.set(false);
 }
 
 void ringsensTask(void* assign) {

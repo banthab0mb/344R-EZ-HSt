@@ -1,28 +1,48 @@
 #include "main.h"  // IWYU pragma: keep
 
+// intake control
 void setIntake() {
+	// <motor name>.move(a number between -127 and 127);
 	if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-		intake.move(127);
+		intake.move(100); 
 	} else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-		intake.move(-127);
+		intake.move(-100);
 	} else {
 		intake.move(0);
 	}
 }
 
+// lady brown control
+
+const int numStates = 3;
+//make sure these are in centidegrees (1 degree = 100 centidegrees)
+int states[numStates] = {0, 300, 2000};
+int currState = 0;
+int target = 0;
+
+void nextState() {
+    currState += 1;
+    if (currState == numStates) {
+        currState = 0;
+    }
+    target = states[currState];
+}
+
+void liftControl() {
+    double kp = 0.5;
+    double error = target - lbRotation.get_position();
+    double velocity = kp * error;
+    wallmech.move(velocity);
+}
+
 void setWall() {
-	wallmech.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 	if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-		wallmech.move_absolute(-750, -90);
-	} else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-		wallmech.move_absolute(0, 90);
-	} else {
-		wallmech.brake();
+		nextState();
 	}
 }
 
-void setMogo() { mogomech.button_toggle(master.get_digital(pros::E_CONTROLLER_DIGITAL_B)); }
+// Pneumatics controls
 
-void setRedirect() { indexer.button_toggle(master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)); }
+void setMogo() { mogomech.button_toggle(master.get_digital(pros::E_CONTROLLER_DIGITAL_B)); }
 
 void setdoinker() { doinker.button_toggle(master.get_digital(pros::E_CONTROLLER_DIGITAL_A)); }

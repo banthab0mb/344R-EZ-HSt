@@ -695,7 +695,7 @@ void skills50() {
 	chassis.pid_wait();
 	chassis.pid_turn_set(183_deg, TURN_SPEED);
 	chassis.pid_wait_quick_chain();
-	indexer.set(true);
+	//indexer.set(true);
 	intake.move(-127);
 	chassis.pid_drive_set(62_in, 90, true);
 	chassis.pid_wait_quick_chain();
@@ -704,7 +704,7 @@ void skills50() {
 	chassis.pid_turn_relative_set(360_deg, 127);
 	chassis.pid_wait();
 	wallmech.move_absolute(-700, -90);
-	indexer.set(false);
+	// indexer.set(false);
 	pros::delay(1000);
 	chassis.pid_drive_set(8_in, DRIVE_SPEED, false);
 	chassis.pid_wait();
@@ -755,7 +755,7 @@ void skills50() {
 	chassis.pid_drive_set(114_in, DRIVE_SPEED, true);
 	chassis.pid_wait_quick_chain();
 	chassis.pid_turn_set(0_deg, TURN_SPEED);
-	indexer.set(true);
+	// indexer.set(true);
 	intake.move(-127);
 	chassis.pid_wait();
 	chassis.pid_drive_set(60_in, DRIVE_SPEED, true);
@@ -767,7 +767,7 @@ void skills50() {
 	chassis.pid_turn_relative_set(360_deg, 127);
 	chassis.pid_wait();
 	wallmech.move_absolute(-700, -90);
-	indexer.set(false);
+	// indexer.set(false);
 	pros::delay(1000);
 	chassis.pid_drive_set(8_in, DRIVE_SPEED, false);
 	chassis.pid_wait();
