@@ -4,9 +4,9 @@
 void setIntake() {
 	// <motor name>.move(a number between -127 and 127);
 	if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-		intake.move(100); 
+		intake.move(-100); 
 	} else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-		intake.move(-100);
+		intake.move(100);
 	} else {
 		intake.move(0);
 	}
@@ -43,6 +43,18 @@ void setWall() {
 
 // Pneumatics controls
 
-void setMogo() { mogomech.button_toggle(master.get_digital(pros::E_CONTROLLER_DIGITAL_B)); }
+void setMogo() { 
+	bool mogomechState = false;
+	if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)){
+    mogomechState = !mogomechState; // toggle piston state
+    mogomech.set(mogomechState);
+	}
+}
 
-void setdoinker() { doinker.button_toggle(master.get_digital(pros::E_CONTROLLER_DIGITAL_A)); }
+void setdoinker() { 
+	bool doinkerState = false;
+	if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)){
+    doinkerState = !doinkerState; // toggle piston state
+    doinker.set(doinkerState);
+	}
+}
