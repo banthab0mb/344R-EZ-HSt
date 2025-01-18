@@ -1,5 +1,6 @@
 #include "main.h"
 #include "stormlib/led.hpp"
+#include "subsystems.hpp"
 
 // big money $_$
 /////
@@ -17,8 +18,8 @@ ez::Drive chassis(
 	{-1, 2, -3},  // Left Chassis Ports (negative port will reverse it!)
 	{4, -5, 6},	  // Right Chassis Ports (negative port will reverse it!)
 
-	12,	   // IMU Port
-	3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
+	11,	   // IMU Port
+	2.75,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
 	450);  // Wheel RPM = cartridge * (motor gear / wheel gear)
 
 // Are you using tracking wheels?  Comment out which ones you're using here!
@@ -129,19 +130,20 @@ void initialize() {
 	pros::Task tempcheckcontroller(tempcheckctrl);
 	pros::Task colordetection(colorDetect);
 
-	pros::Task liftControlTask([]{
-        while (true) {
-            liftControl();
-            pros::delay(10);
-        }
-    });
+	
 
 	// LED stuffs
 	strand1.init();
 	strand1.rainbow();
 	strand2.init();
 	strand2.rainbow();
-
+	
+	// pros::Task liftControlTask([]{
+	// 		while (true) {
+	// 			liftControl();
+	// 			pros::delay(10);
+	// 		}
+	// 	});
 }
 
 /**
@@ -316,14 +318,14 @@ void opcontrol() {
 		// . . .
 		setIntake();
 		setMogo();
-		setWall();
+		//setWall();
 		setdoinker();
 
-		if(lv_tileview_get_tile_act(mainscreen) == motortemps) {
-			for(int m = 0; m < motorbar.size(); m++) {
-				lv_event_send(motorboxes[m], LV_EVENT_REFRESH, NULL);
-			}
-		}
+		// if(lv_tileview_get_tile_act(mainscreen) == motortemps) {
+		// 	for(int m = 0; m < motorbar.size(); m++) {
+		// 		lv_event_send(motorboxes[m], LV_EVENT_REFRESH, NULL);
+		// 	}
+		// }
 
 		pros::delay(ez::util::DELAY_TIME);	// This is used for timer calculations! Keep this ez::util::DELAY_TIME
 	}
