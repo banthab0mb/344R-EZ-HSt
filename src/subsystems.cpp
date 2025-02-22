@@ -45,7 +45,7 @@ void nextState() {
 }
 
  void setWall() {
-	if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
+	if (master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
 		if (!buttonPressed) {
 			armStage++;
 			if (armStage > 3) armStage = 1;
