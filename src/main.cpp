@@ -58,6 +58,8 @@ void initialize() {
 	// chassis.odom_tracker_left_set(&left_tracker);
 	// chassis.odom_tracker_back_set(&horiz_tracker);	// Replace `back` to `front` if your tracker is in the front!
 
+	lbRotation.set_position(0);
+
 	// Configure your chassis controls
 	chassis.opcontrol_curve_buttons_toggle(false);	// Enables modifying the controller curve with buttons on the
 													// joysticks
@@ -138,12 +140,6 @@ void initialize() {
 	strand2.init();
 	strand2.rainbow();
 	
-	// pros::Task liftControlTask([]{
-	// 		while (true) {
-	// 			liftControl();
-	// 			pros::delay(10);
-	// 		}
-	// 	});
 }
 
 /**
@@ -318,7 +314,7 @@ void opcontrol() {
 		// . . .
 		setIntake();
 		setMogo();
-		//setWall();
+		setWall();
 		setdoinker();
 
 		// if(lv_tileview_get_tile_act(mainscreen) == motortemps) {

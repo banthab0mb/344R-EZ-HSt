@@ -2,10 +2,13 @@
 
 #include "EZ-Template/api.hpp"  // IWYU pragma: keep
 #include "api.h"  // IWYU pragma: keep
+#include "pros/motors.hpp"
 
 // Motors, sensors, etc
 inline pros::Motor intake(12);
-inline pros::Motor wallmech(-14);
+inline pros::Motor lb1(-14);
+inline pros::Motor lb2(13);
+inline pros::MotorGroup wallmech({lb1.get_port(), lb2.get_port()});
 inline ez::Piston mogomech('G');
 inline ez::Piston doinker('C');
 inline pros::Optical ringsens(8);
@@ -22,7 +25,5 @@ void liftControl();
 extern bool doinkerState;
 extern bool mogomechState;
 
-extern int states[];
-extern const int numStates;
-extern int currState;
-extern int target;
+extern bool buttonPressed;
+extern int armStage;

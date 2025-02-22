@@ -1,7 +1,10 @@
+#include "subsystems.hpp"
 #include "main.h"  // IWYU pragma: keep
 #include "pros/misc.h"
 
 // intake control
+
+//pros::MotorGroup wallmech({-14, 13});
 
 void setIntake() {
 	// <motor name>.move(a number between -127 and 127);
@@ -16,31 +19,42 @@ void setIntake() {
 
 // lady brown control
 
-// const int numStates = 3;
-// //make sure these are in centidegrees (1 degree = 100 centidegrees)
-// int states[numStates] = {7500, 5800, 31000};
-// int currState = 0;
-// int target = 0;
+int armStage = 1; // 1 = Idle, 2 = Loading, 3 = Scoring
+bool buttonPressed = false;
+
+void liftControl(int stage) {
+    int targetPosition = 0;
+    switch (stage) {
+        case 1:
+            targetPosition = 0; // Idle position
+            break;
+        case 2:
+            targetPosition = 90; // Loading position
+            break;
+        case 3:
+            targetPosition = 180; // Scoring position
+            break;
+    }
+    wallmech.move_absolute(targetPosition, 100);
+}
 
 void nextState() {
-     //currState += 1;
-     //if (currState == numStates) {
-    //     currState = 0;
-  //   }
-//     target = states[currState];
- }
-
-// void liftControl() {
-//     double kp = 0.5;
-//     double error = target - lbRotation.get_position();
-//     double velocity = kp * error;
-//     wallmech.move(velocity);
-// }
+	armStage++;
+			if (armStage > 3) armStage = 1;
+			liftControl(armStage);
+}
 
  void setWall() {
- 	if(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
- 		nextState();
- 	}
+	if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
+		if (!buttonPressed) {
+			armStage++;
+			if (armStage > 3) armStage = 1;
+			liftControl(armStage);
+			buttonPressed = true;
+		}
+	} else {
+		buttonPressed = false;
+	}
 }
 
 // Pneumatics controls
