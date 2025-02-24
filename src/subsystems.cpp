@@ -9,9 +9,9 @@
 void setIntake() {
 	// <motor name>.move(a number between -127 and 127);
 	if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-		intake.move(-75); 
+		intake.move(-100); 
 	} else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-		intake.move(75);
+		intake.move(100);
 	} else {
 		intake.move(0);
 	}
@@ -26,13 +26,13 @@ void liftControl(int stage) {
     int targetPosition = 0;
     switch (stage) {
         case 1:
-            targetPosition = 0; // Idle position
+            targetPosition = 25; // Idle position 
             break;
         case 2:
-            targetPosition = 90; // Loading position
+            targetPosition = 130; // Loading position 
             break;
         case 3:
-            targetPosition = 180; // Scoring position
+            targetPosition = 500; // Scoring position
             break;
     }
     wallmech.move_absolute(targetPosition, 100);
@@ -45,7 +45,7 @@ void nextState() {
 }
 
  void setWall() {
-	if (master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
+	if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
 		if (!buttonPressed) {
 			armStage++;
 			if (armStage > 3) armStage = 1;
