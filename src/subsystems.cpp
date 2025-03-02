@@ -9,9 +9,9 @@
 void setIntake() {
 	// <motor name>.move(a number between -127 and 127);
 	if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-		intake.move(-100); 
+		intake.move(-127); 
 	} else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-		intake.move(100);
+		intake.move(127);
 	} else {
 		intake.move(0);
 	}
@@ -26,7 +26,7 @@ void liftControl(int stage) {
     int targetPosition = 0;
     switch (stage) {
         case 1:
-            targetPosition = 25; // Idle position 
+            targetPosition = 20; // Idle position 
             break;
         case 2:
             targetPosition = 130; // Loading position 
@@ -35,7 +35,7 @@ void liftControl(int stage) {
             targetPosition = 500; // Scoring position
             break;
     }
-    wallmech.move_absolute(targetPosition, 100);
+    wallmech.move_absolute(targetPosition, 75);
 }
 
 void nextState() {
@@ -45,7 +45,7 @@ void nextState() {
 }
 
  void setWall() {
-	if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
+	if (master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
 		if (!buttonPressed) {
 			armStage++;
 			if (armStage > 3) armStage = 1;
@@ -64,6 +64,11 @@ void setMogo() {
     mogomechState = !mogomechState; // toggle piston state
     mogomech.set(mogomechState);
 	}
+}
+
+void autonMogo() {
+	mogomechState = !mogomechState; // toggle piston state
+    mogomech.set(mogomechState);
 }
 
 bool doinkerState = false;

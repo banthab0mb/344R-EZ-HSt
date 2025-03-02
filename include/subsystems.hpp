@@ -21,6 +21,7 @@ void setMogo();
 void setdoinker();
 void nextState();
 void liftControl();
+void autonMogo();
 
 extern bool doinkerState;
 extern bool mogomechState;
